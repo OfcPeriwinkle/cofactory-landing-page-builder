@@ -72,7 +72,7 @@ async function seedPageComponents() {
   const insertedPageComponents = await Promise.all(
     pageComponents.map(async (pageComponent) => {
       return sql`
-                  INSERT INTO page_components (id, landing_page_id, created_at, updated_at, order_index, base_component_id, content)
+                  INSERT INTO page_components (id, landing_page_id, created_at, updated_at, order_index, base_component_id, props)
                   VALUES (
                     ${pageComponent.id},
                     ${pageComponent.landing_page_id},
