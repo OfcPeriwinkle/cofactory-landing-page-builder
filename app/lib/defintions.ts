@@ -24,6 +24,10 @@ export type PageComponent = {
   props: object;
 };
 
+export type FetchedPageComponent = PageComponent & {
+  base_component_name: string;
+};
+
 export type BaseComponent = {
   id: string;
   name: string;
