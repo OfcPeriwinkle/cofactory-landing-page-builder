@@ -1,7 +1,19 @@
 import postgres from 'postgres';
-import { PageComponent } from './defintions';
+import { BaseComponent, PageComponent } from './defintions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+
+export async function fetchBaseComponents(): Promise<BaseComponent[]> {
+  try {
+    const baseComponents: Promise<BaseComponent[]> = sql`
+        SELECT * FROM base_components
+        `;
+    return baseComponents;
+  } catch (error) {
+    console.error('Error fetching base components:', error);
+    return [];
+  }
+}
 
 export async function fetchPageComponents(pageId: string): Promise<PageComponent[]> {
   try {
