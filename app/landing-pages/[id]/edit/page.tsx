@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     const { default: BaseComponent } = await import(
       `@/app/ui/base-components/${pageComponent.base_component_name}`
     );
-    return <BaseComponent {...pageComponent.props} />;
+    return <BaseComponent {...JSON.parse(pageComponent.props)} />;
   });
 
   return <>{initializedPageComponents}</>;
