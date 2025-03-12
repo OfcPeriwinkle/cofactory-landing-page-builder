@@ -8,4 +8,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   console.log('Page components for id:', id);
   const pageComponents = await fetchPageComponents(id);
   console.log(pageComponents);
+
+  const initializedPageComponents = pageComponents.map(async (pageComponent) => {
+    const { default: BaseComponent } = await import(
+      `@/app/ui/base-components/${pageComponent.base_component_name}`
+    );
+    return <BaseComponent {...pageComponent.props} />;
+  });
+
+  return <>{initializedPageComponents}</>;
 }
