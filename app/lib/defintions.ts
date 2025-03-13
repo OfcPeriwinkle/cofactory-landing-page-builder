@@ -34,3 +34,8 @@ export type BaseComponent = {
   name: string;
   friendly_name: string;
 };
+
+export type ActionState = {
+  message: string;
+  error: object;
+};

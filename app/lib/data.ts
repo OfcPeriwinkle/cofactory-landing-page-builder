@@ -28,3 +28,22 @@ export async function fetchPageComponents(pageId: string): Promise<FetchedPageCo
     return [];
   }
 }
+
+export async function insertPageComponent(
+  landingPageId: string,
+  baseComponentId: string,
+  orderIndex: number,
+  props?: object
+): Promise<number | null> {
+  try {
+    const result = await sql`
+      INSERT INTO page_components (landing_page_id, base_component_id, order_index, props)
+      VALUES (${landingPageId}, ${baseComponentId}, ${orderIndex}, ${JSON.stringify(props)})
+      RETURNING id
+      `;
+    return result[0].id;
+  } catch (error) {
+    console.error('Error creating page component:', error);
+    return null;
+  }
+}
