@@ -1,7 +1,7 @@
 'use server';
 
 import { ActionState } from '@/app/lib/defintions';
-import { insertPageComponent, updatePageComponent } from './data';
+import { insertPageComponent, updatePageComponent, deletePageComponent } from './data';
 import { revalidatePath } from 'next/cache';
 
 export async function addPageComponent(
@@ -39,3 +39,5 @@ export async function editPageComponent(
     return { message: 'Error updating page component', error: { error } };
   }
 }
+
+export async function removePageComponent(landingPageId: string, pageComponentId: string) {}

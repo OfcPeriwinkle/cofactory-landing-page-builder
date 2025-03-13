@@ -71,3 +71,24 @@ export async function updatePageComponent(
     console.error('Error updating page component:', error);
   }
 }
+
+export async function deletePageComponent(
+  landingPageId: string,
+  pageComponentId: string
+): Promise<void> {
+  try {
+    await sql.begin(async (sql) => {
+      await sql`
+        DELETE FROM page_components
+        WHERE id = ${pageComponentId}
+        `;
+
+      await sql`
+            UPDATE pages
+            SET updated_at = NOW()
+            WHERE id = ${landingPageId}`;
+    });
+  } catch (error) {
+    console.error('Error deleting page component:', error);
+  }
+}
