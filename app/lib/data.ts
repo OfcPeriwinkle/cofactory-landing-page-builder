@@ -38,7 +38,7 @@ export async function insertPageComponent(
   try {
     const result = await sql`
       INSERT INTO page_components (landing_page_id, base_component_id, order_index, props)
-      VALUES (${landingPageId}, ${baseComponentId}, ${orderIndex}, ${JSON.stringify(props)})
+      VALUES (${landingPageId}, ${baseComponentId}, ${orderIndex}, ${JSON.stringify(props) || '{}'})
       RETURNING id
       `;
     return result[0].id;

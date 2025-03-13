@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   return (
     <>
       {initializedPageComponents}
-      <AddComponentModal baseComponents={baseComponents} index={maxOrderIndex} />
+      <AddComponentModal baseComponents={baseComponents} index={maxOrderIndex + 1} />
     </>
   );
 }

@@ -11,6 +11,7 @@ import {
   useDisclosure,
   Form,
 } from '@heroui/react';
+import ComponentSelect from './component-select';
 
 import { usePathname } from 'next/navigation';
 import { addPageComponent } from '@/app/lib/actions';
@@ -48,7 +49,7 @@ export default function AddComponentModal({
               <Form className="flex flex-col gap-4 justify-start w-full" action={formAction}>
                 <ModalHeader className="flex flex-col gap-1">Add a Component</ModalHeader>
                 <ModalBody className="w-full">
-                  {/* <ComponentSelect baseComponents={baseComponents} /> */}
+                  <ComponentSelect baseComponents={baseComponents} />
                 </ModalBody>
                 <ModalFooter className="flex justify-between w-full">
                   <Button color="danger" variant="flat" onPress={onClose}>
