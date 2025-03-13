@@ -1,7 +1,7 @@
 'use server';
 
 import { ActionState } from '@/app/lib/defintions';
-import { insertPageComponent } from './data';
+import { insertPageComponent, updatePageComponent } from './data';
 import { revalidatePath } from 'next/cache';
 
 export async function addPageComponent(
@@ -19,5 +19,23 @@ export async function addPageComponent(
   } catch (error) {
     console.error('Error adding page component:', error);
     return { message: 'Error adding page component', error: { error } };
+  }
+}
+
+export async function editPageComponent(
+  landingPageId: string,
+  pageComponentId: string,
+  prevState: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  try {
+    const props = Object.fromEntries(formData.entries());
+    await updatePageComponent(landingPageId, pageComponentId, props);
+
+    revalidatePath(`/landing-pages/${landingPageId}/edit`);
+    return { message: 'Updated page component', error: {} };
+  } catch (error) {
+    console.error('Error updating page component:', error);
+    return { message: 'Error updating page component', error: { error } };
   }
 }

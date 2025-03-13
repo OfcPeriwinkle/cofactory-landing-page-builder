@@ -47,3 +47,26 @@ export async function insertPageComponent(
     return null;
   }
 }
+
+export async function updatePageComponent(
+  landingPageId: string,
+  pageComponentId: string,
+  props: object
+): Promise<void> {
+  try {
+    await sql.begin(async (sql) => {
+      await sql`
+        UPDATE page_components
+        SET props = ${JSON.stringify(props)}, updated_at = NOW()
+        WHERE id = ${pageComponentId}
+        `;
+
+      await sql`
+          UPDATE pages
+          SET updated_at = NOW()
+          WHERE id = ${landingPageId}`;
+    });
+  } catch (error) {
+    console.error('Error updating page component:', error);
+  }
+}
