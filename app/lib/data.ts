@@ -21,6 +21,7 @@ export async function fetchPageComponents(pageId: string): Promise<FetchedPageCo
     SELECT page_components.id, order_index, base_components.name as base_component_name, props FROM page_components
     JOIN base_components ON page_components.base_component_id = base_components.id
     WHERE landing_page_id = ${pageId}
+    ORDER BY order_index
     `;
     return pageComponents;
   } catch (error) {
