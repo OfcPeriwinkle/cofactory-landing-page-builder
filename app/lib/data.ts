@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { BaseComponent, FetchedPageComponent } from './defintions';
+import { BaseComponent, FetchedPageComponent, LandingPage } from './defintions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -93,9 +93,9 @@ export async function deletePageComponent(
   }
 }
 
-export async function fetchLandingPages() {
+export async function fetchLandingPages(): Promise<LandingPage[]> {
   try {
-    const landingPages = await sql`
+    const landingPages: Promise<LandingPage[]> = sql`
       SELECT * FROM pages
       ORDER BY updated_at DESC
       `;
