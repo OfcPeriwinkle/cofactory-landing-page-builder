@@ -2,7 +2,7 @@
 
 import { Form, Input, Button } from '@heroui/react';
 import { usePathname } from 'next/navigation';
-import { editPageComponent } from '@/app/lib/actions';
+import { editPageComponent, removePageComponent } from '@/app/lib/actions';
 import { useActionState } from 'react';
 
 export default function HeroForm({
@@ -23,6 +23,8 @@ export default function HeroForm({
     error: {},
   });
 
+  const removePageComponentWithIds = removePageComponent.bind(null, pageId, pageComponentId);
+
   return (
     <>
       <Form className="w-full justify-center items-center space-y-4" action={formAction}>
@@ -30,7 +32,9 @@ export default function HeroForm({
           <Input label="Title" labelPlacement="outside" name="title" placeholder={title} />
           <Input label="Subtitle" labelPlacement="outside" name="subtitle" placeholder={subtitle} />
           <div className="flex gap-4">
-            <Button color="danger">Delete</Button>
+            <Button color="danger" onPress={removePageComponentWithIds}>
+              Delete
+            </Button>
             <Button className="w-full" color="primary" type="submit">
               Submit
             </Button>
