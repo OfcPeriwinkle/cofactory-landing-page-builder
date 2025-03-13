@@ -6,11 +6,7 @@ import EditWindow from '@/app/ui/landing-pages/edit/edit-window';
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const baseComponents = await fetchBaseComponents();
-  console.log('Base components:', baseComponents);
-
-  console.log('Page components for id:', id);
   const pageComponents = await fetchPageComponents(id);
-  console.log(pageComponents);
 
   // Get the max order index so we can add a new component to the end
   const maxOrderIndex = pageComponents.reduce((max, component) => {
