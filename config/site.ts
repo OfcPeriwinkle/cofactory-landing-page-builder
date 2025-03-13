@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'Next.js + HeroUI',
-  description: 'Make beautiful websites regardless of your design experience.',
+  name: 'CoFactory Landing Page Builder',
+  description: 'Make horific websites regardless of your design experience.',
   navItems: [
     {
       label: 'Home',
@@ -15,20 +15,16 @@ export const siteConfig = {
   ],
   navMenuItems: [
     {
-      label: 'Dashboard',
-      href: '/dashboard',
+      label: 'Home',
+      href: '/',
     },
     {
-      label: 'Logout',
-      href: '/logout',
+      label: 'Dashboard',
+      href: '/dashboard',
     },
   ],
   links: {
     github: 'https://github.com/OfcPeriwinkle/cofactory-landing-page-builder',
-    twitter: 'https://twitter.com/hero_ui',
-    docs: 'https://heroui.com',
-    discord: 'https://discord.gg/9b6yyZKmH4',
-    sponsor: 'https://patreon.com/jrgarciadev',
     dashboard: '/dashboard',
   },
 };

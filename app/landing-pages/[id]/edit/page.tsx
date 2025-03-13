@@ -39,15 +39,17 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   return (
     <>
-      <div className="flex justify-between pb-4">
-        <DashboardButton />
-        <ViewButton landingPageId={id} />
-      </div>
-      <EditWindow
-        pageComponents={initializedPageComponents}
-        pageComponentForms={initializedPageComponentForms}
-      />
-      <AddComponentModal baseComponents={baseComponents} index={maxOrderIndex + 1} />
+      <section className="flex flex-col gap-4">
+        <div className="flex justify-between pb-4">
+          <DashboardButton />
+          <ViewButton landingPageId={id} />
+        </div>
+        <EditWindow
+          pageComponents={initializedPageComponents}
+          pageComponentForms={initializedPageComponentForms}
+        />
+        <AddComponentModal baseComponents={baseComponents} index={maxOrderIndex + 1} />
+      </section>
     </>
   );
 }

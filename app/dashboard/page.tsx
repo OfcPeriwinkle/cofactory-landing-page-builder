@@ -4,7 +4,6 @@ import AddLandingPageModal from '../ui/dashboard/add-landing-page-modal';
 
 export default async function Page() {
   const landingPages = await fetchLandingPages();
-  console.log(landingPages);
 
   return (
     <>
