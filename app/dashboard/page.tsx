@@ -1,4 +1,5 @@
 import { fetchLandingPages } from '@/app/lib/data';
+import LandingPageCard from '../ui/dashboard/landing-page-card';
 
 export default async function Page() {
   const landingPages = await fetchLandingPages();
@@ -8,10 +9,7 @@ export default async function Page() {
     <div>
       <h1>Landing Pages</h1>
       {landingPages.map((landingPage) => (
-        <div key={landingPage.id}>
-          <h2>{landingPage.title}</h2>
-          <p>{landingPage.description}</p>
-        </div>
+        <LandingPageCard key={landingPage.id} landingPage={landingPage} />
       ))}
     </div>
   );
