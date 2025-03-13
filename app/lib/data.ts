@@ -1,5 +1,6 @@
 import postgres from 'postgres';
-import { BaseComponent, FetchedPageComponent } from './defintions';
+import { BaseComponent, FetchedPageComponent, LandingPage } from './defintions';
+import { users } from '@/app/lib/placeholder-data';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -90,5 +91,47 @@ export async function deletePageComponent(
     });
   } catch (error) {
     console.error('Error deleting page component:', error);
+  }
+}
+
+export async function fetchLandingPages(): Promise<LandingPage[]> {
+  try {
+    const landingPages: Promise<LandingPage[]> = sql`
+      SELECT * FROM pages
+      ORDER BY updated_at DESC
+      `;
+    return landingPages;
+  } catch (error) {
+    console.error('Error fetching landing pages:', error);
+    return [];
+  }
+}
+
+export async function insertLandingPage(
+  title: string,
+  description: string
+): Promise<string | null> {
+  // TODO: using placeholder user id for now
+  try {
+    const result = await sql`
+      INSERT INTO pages (title, description, user_id)
+      VALUES (${title}, ${description}, ${users[0].id})
+      RETURNING id
+      `;
+    return result[0].id;
+  } catch (error) {
+    console.error('Error creating landing page:', error);
+    return null;
+  }
+}
+
+export async function deleteLandingPage(landingPageId: string): Promise<void> {
+  try {
+    await sql`
+      DELETE FROM pages
+      WHERE id = ${landingPageId}
+      `;
+  } catch (error) {
+    console.error('Error deleting landing page:', error);
   }
 }
