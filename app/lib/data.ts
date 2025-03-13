@@ -92,3 +92,16 @@ export async function deletePageComponent(
     console.error('Error deleting page component:', error);
   }
 }
+
+export async function fetchLandingPages() {
+  try {
+    const landingPages = await sql`
+      SELECT * FROM pages
+      ORDER BY updated_at DESC
+      `;
+    return landingPages;
+  } catch (error) {
+    console.error('Error fetching landing pages:', error);
+    return [];
+  }
+}
