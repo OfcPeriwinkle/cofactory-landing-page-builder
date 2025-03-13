@@ -1,4 +1,5 @@
 import { fetchBaseComponents, fetchPageComponents } from '@/app/lib/data';
+import { DashboardButton, ViewButton } from '@/app/ui/landing-pages/buttons';
 import AddComponentModal from '@/app/ui/landing-pages/edit/add-component-modal';
 import EditWindow from '@/app/ui/landing-pages/edit/edit-window';
 
@@ -42,6 +43,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   return (
     <>
+      <div className="flex justify-between pb-4">
+        <DashboardButton />
+        <ViewButton landingPageId={id} />
+      </div>
       <EditWindow
         pageComponents={initializedPageComponents}
         pageComponentForms={initializedPageComponentForms}
