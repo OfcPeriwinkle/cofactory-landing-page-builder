@@ -2,10 +2,10 @@ import { PageComponent } from '@/app/lib/defintions';
 
 export default function EditWindow({
   pageComponents,
-  //   pageComponentForms,
+  pageComponentForms,
 }: {
   pageComponents: any[];
-  //   pageComponentForms: any[];
+  pageComponentForms: any[];
 }) {
   return (
     <>

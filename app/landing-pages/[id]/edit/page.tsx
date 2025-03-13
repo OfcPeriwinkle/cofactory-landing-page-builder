@@ -16,18 +16,35 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     return Math.max(max, component.order_index);
   }, 0);
 
-  const initializedPageComponents = await pageComponents.map(async (pageComponent) => {
-    const { default: BaseComponent } = await import(
-      `@/app/ui/base-components/${pageComponent.base_component_name}`
-    );
-    return <BaseComponent {...JSON.parse(pageComponent.props)} />;
-  });
+  const initializedPageComponents = await Promise.all(
+    pageComponents.map(async (pageComponent) => {
+      const { default: BaseComponent } = await import(
+        `@/app/ui/base-components/${pageComponent.base_component_name}`
+      );
+      return <BaseComponent {...JSON.parse(pageComponent.props)} />;
+    })
+  );
+
+  const initializedPageComponentForms = await Promise.all(
+    pageComponents.map(async (component) => {
+      const { default: FormComponent } = await import(
+        `@/app/ui/base-components/forms/${component.base_component_name}`
+      );
+      return (
+        <FormComponent
+          key={component.id}
+          pageComponentId={component.id}
+          {...JSON.parse(component.props)}
+        />
+      );
+    })
+  );
 
   return (
     <>
       <EditWindow
         pageComponents={initializedPageComponents}
-        // pageComponentForms={initializedForms}
+        pageComponentForms={initializedPageComponentForms}
       />
       <AddComponentModal baseComponents={baseComponents} index={maxOrderIndex + 1} />
     </>
