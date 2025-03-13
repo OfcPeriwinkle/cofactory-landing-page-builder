@@ -40,4 +40,14 @@ export async function editPageComponent(
   }
 }
 
-export async function removePageComponent(landingPageId: string, pageComponentId: string) {}
+export async function removePageComponent(landingPageId: string, pageComponentId: string) {
+  try {
+    await deletePageComponent(landingPageId, pageComponentId);
+
+    revalidatePath(`/landing-pages/${landingPageId}/edit`);
+    return { message: 'Removed page component', error: {} };
+  } catch (error) {
+    console.error('Error removing page component:', error);
+    return { message: 'Error removing page component', error: { error } };
+  }
+}
