@@ -1,5 +1,6 @@
 import { fetchBaseComponents, fetchPageComponents } from '@/app/lib/data';
 import AddComponentModal from '@/app/ui/landing-pages/edit/add-component-modal';
+import EditWindow from '@/app/ui/landing-pages/edit/edit-window';
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -15,7 +16,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     return Math.max(max, component.order_index);
   }, 0);
 
-  const initializedPageComponents = pageComponents.map(async (pageComponent) => {
+  const initializedPageComponents = await pageComponents.map(async (pageComponent) => {
     const { default: BaseComponent } = await import(
       `@/app/ui/base-components/${pageComponent.base_component_name}`
     );
@@ -24,7 +25,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   return (
     <>
-      {initializedPageComponents}
+      <EditWindow
+        pageComponents={initializedPageComponents}
+        // pageComponentForms={initializedForms}
+      />
       <AddComponentModal baseComponents={baseComponents} index={maxOrderIndex + 1} />
     </>
   );
