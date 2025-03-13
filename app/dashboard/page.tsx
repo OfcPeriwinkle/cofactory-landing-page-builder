@@ -6,11 +6,13 @@ export default async function Page() {
   console.log(landingPages);
 
   return (
-    <div>
-      <h1>Landing Pages</h1>
-      {landingPages.map((landingPage) => (
-        <LandingPageCard key={landingPage.id} landingPage={landingPage} />
-      ))}
-    </div>
+    <>
+      <h1 className="text-4xl mb-12">Landing Pages</h1>
+      <div className="flex flex-wrap gap-4">
+        {landingPages.map((landingPage) => (
+          <LandingPageCard key={landingPage.id} landingPage={landingPage} />
+        ))}
+      </div>
+    </>
   );
 }
