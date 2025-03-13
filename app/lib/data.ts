@@ -124,3 +124,14 @@ export async function insertLandingPage(
     return null;
   }
 }
+
+export async function deleteLandingPage(landingPageId: string): Promise<void> {
+  try {
+    await sql`
+      DELETE FROM pages
+      WHERE id = ${landingPageId}
+      `;
+  } catch (error) {
+    console.error('Error deleting landing page:', error);
+  }
+}

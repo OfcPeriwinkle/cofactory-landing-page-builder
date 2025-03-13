@@ -2,11 +2,17 @@
 
 import { LandingPage } from '@/app/lib/defintions';
 import { Button, ButtonGroup, Card, CardHeader, CardBody, CardFooter } from '@heroui/react';
+import { removeLandingPage } from '@/app/lib/actions';
 
 import { useRouter } from 'next/navigation';
 
 export default function LandingPageCard({ landingPage }: { landingPage: LandingPage }) {
   const router = useRouter();
+
+  const handleDelete = async () => {
+    await removeLandingPage(landingPage.id);
+    router.refresh();
+  };
 
   return (
     <Card>
@@ -31,7 +37,9 @@ export default function LandingPageCard({ landingPage }: { landingPage: LandingP
           >
             Edit
           </Button>
-          <Button color="danger">Delete</Button>
+          <Button color="danger" onPress={handleDelete}>
+            Delete
+          </Button>
         </ButtonGroup>
       </CardFooter>
     </Card>

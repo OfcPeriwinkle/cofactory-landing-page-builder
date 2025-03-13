@@ -6,6 +6,7 @@ import {
   updatePageComponent,
   deletePageComponent,
   insertLandingPage,
+  deleteLandingPage,
 } from './data';
 import { revalidatePath } from 'next/cache';
 
@@ -72,5 +73,17 @@ export async function addLandingPage(
   } catch (error) {
     console.error('Error adding landing page:', error);
     return { message: 'Error adding landing page', error: { error } };
+  }
+}
+
+export async function removeLandingPage(landingPageId: string) {
+  try {
+    await deleteLandingPage(landingPageId);
+
+    revalidatePath('/dashboard');
+    return { message: 'Removed landing page', error: {} };
+  } catch (error) {
+    console.error('Error removing landing page:', error);
+    return { message: 'Error removing landing page', error: { error } };
   }
 }
